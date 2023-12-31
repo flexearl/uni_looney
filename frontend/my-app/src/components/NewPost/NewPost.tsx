@@ -2,20 +2,22 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '../authProvider'
 
-interface Post {
+export interface Post {
     title: string,
     body: string,
     description:string,
 }
 
-export default function AddPost(){
-    
+export default function NewPost(){
+
     const [post, setPost] = useState<Post>({title:"", body:"", description:""})
 
     const {token} = useAuth()
 
     function AddPost(event: React.MouseEvent<HTMLElement>){
         event.preventDefault()
+            event.stopPropagation()
+    
         let newPost: Post = {body:"dadjd", description:"fjfjfj", title:"ffkfkn"}
         
         const headers = {
@@ -52,7 +54,7 @@ export default function AddPost(){
             <input placeholder='Title' value={post?.title} name="title" onChange={handleInputChange}/>
             <input placeholder='Description' value={post.description} name='description' onChange={handleInputChange}/>
             <input placeholder='Body' value={post.body} name='body' onChange={handleInputChange}/>
-            
+            <button onClick={AddPost}/>
         </div>    
     )
 }

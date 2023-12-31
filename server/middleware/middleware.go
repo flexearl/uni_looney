@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -17,7 +18,15 @@ type Message struct {
 }
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
+	header := w.Header()
+	fmt.Println("Getting posts")
+	header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
 
+	header.Add("Content-Type", "application/json")
+	header.Add("Access-Control-Allow-Headers", "*")
+	posts := []post.Post{{"dd", "fff", "fff", 5}, {"dd", "fff", "fff", 6}}
+	a, _ := json.Marshal(posts)
+	w.Write(a)
 }
 
 func AddPost(w http.ResponseWriter, r *http.Request) {

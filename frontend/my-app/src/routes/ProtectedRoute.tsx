@@ -3,7 +3,9 @@ import {useAuth} from "../components/authProvider"
 
 export default function ProtectedRoute(){
     const token = useAuth()
-    if (token?.token==""){
+    console.log("In protected routes")
+    if (token?.token=="" || token.token == null){
+        console.log("Wrong place")
         return <Navigate to="/login"/>
     }
     return <Outlet/>

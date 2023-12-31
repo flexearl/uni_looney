@@ -12,5 +12,6 @@ func HandleRoutes() {
 	http.Handle("/add_post", token.VerifyJWT(http.HandlerFunc(middleware.AddPost)))
 	http.HandleFunc("/register", middleware.Register)
 	http.HandleFunc("/login", middleware.Login)
+	http.HandleFunc("/all_posts", middleware.GetPosts)
 
 }
